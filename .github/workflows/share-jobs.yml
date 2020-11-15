@@ -26,7 +26,7 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: myimage:latest
-          outputs: type=oci,dest=/tmp/myimage.tar
+          outputs: type=docker,dest=/tmp/myimage.tar
       -
         name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -55,7 +55,7 @@ jobs:
         name: Load Docker image
         run: |
           docker load --input /tmp/myimage.tar
-          docker image ls
+          docker image ls -a
       -
         name: Dump context
         if: always()
