@@ -52,8 +52,8 @@ jobs:
           file: ./Dockerfile
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.prep.outputs.tags }}
-          labels: ${{ steps.prep.outputs.labels }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
       -
         name: Dump context
         if: always()
@@ -96,8 +96,8 @@ jobs:
           file: ./Dockerfile
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.prep.outputs.tags }}
-          labels: ${{ steps.prep.outputs.labels }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
       -
         name: Dump context
         if: always()
@@ -114,7 +114,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ghcr.io/crazymax/test-docker-action
+          images: ghcr.io/crazy-max/test-docker-action
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -140,8 +140,8 @@ jobs:
           file: ./Dockerfile
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.prep.outputs.tags }}
-          labels: ${{ steps.prep.outputs.labels }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
       -
         name: Dump context
         if: always()
