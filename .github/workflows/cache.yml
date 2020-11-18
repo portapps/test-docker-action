@@ -3,9 +3,6 @@ name: cache
 on:
   workflow_dispatch:
     inputs:
-      build-push-version:
-        required: false
-        default: 'master'
       buildx-version:
         required: false
       buildx-driver-opts:
@@ -47,7 +44,7 @@ jobs:
           rm -rf /tmp/.buildx-cache/*
       -
         name: Build
-        uses: docker/build-push-action@${{ github.event.inputs.build-push-version }}
+        uses: docker/build-push-action@master
         with:
           context: .
           file: ./Dockerfile
@@ -83,7 +80,7 @@ jobs:
             ${{ runner.os }}-buildx-cache-
       -
         name: Build
-        uses: docker/build-push-action@${{ github.event.inputs.build-push-version }}
+        uses: docker/build-push-action@master
         with:
           context: .
           file: ./Dockerfile
@@ -117,7 +114,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
         name: Build
-        uses: docker/build-push-action@${{ github.event.inputs.build-push-version }}
+        uses: docker/build-push-action@master
         with:
           context: .
           file: ./Dockerfile

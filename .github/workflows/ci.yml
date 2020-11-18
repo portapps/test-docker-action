@@ -3,9 +3,6 @@ name: ci
 on:
   workflow_dispatch:
     inputs:
-      build-push-version:
-        required: false
-        default: 'master'
       buildx-version:
         required: false
       buildx-driver-opts:
@@ -35,7 +32,7 @@ jobs:
         run: echo ${{ steps.buildx.outputs.platforms }}
       -
         name: Build
-        uses: docker/build-push-action@${{ github.event.inputs.build-push-version }}
+        uses: docker/build-push-action@master
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: .

@@ -3,9 +3,6 @@ name: containerd
 on:
   workflow_dispatch:
     inputs:
-      build-push-version:
-        required: false
-        default: 'master'
       buildx-version:
         required: false
       buildx-driver-opts:
@@ -54,7 +51,7 @@ jobs:
         uses: crazy-max/ghaction-setup-containerd@v1
       -
         name: Build
-        uses: docker/build-push-action@${{ github.event.inputs.build-push-version }}
+        uses: docker/build-push-action@master
         with:
           context: .
           file: ./Dockerfile

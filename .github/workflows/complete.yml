@@ -3,9 +3,6 @@ name: complete
 on:
   workflow_dispatch:
     inputs:
-      build-push-version:
-        required: false
-        default: 'master'
       buildx-version:
         required: false
       buildx-driver-opts:
@@ -54,7 +51,7 @@ jobs:
       -
         name: Build and push
         id: docker_build
-        uses: docker/build-push-action@${{ github.event.inputs.build-push-version }}
+        uses: docker/build-push-action@master
         with:
           context: .
           file: ./Dockerfile
