@@ -2,6 +2,13 @@ name: cache
 
 on:
   workflow_dispatch:
+    inputs:
+      buildx-version:
+        description: 'Buildx version (eg. v0.3.0, latest)'
+        required: false
+      buildx-driver-opts:
+        description: 'List of additional driver-specific options (eg. image=moby/buildkit:master)'
+        required: false
   push:
     branches: master
     tags:
@@ -23,7 +30,8 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
-          driver-opts: image=moby/buildkit:master
+          version: ${{ inputs.buildx-version }}
+          driver-opts: ${{ inputs.buildx-driver-opts }}
       -
         name: Cache Docker layers
         uses: actions/cache@v2
@@ -62,7 +70,8 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
-          driver-opts: image=moby/buildkit:master
+          version: ${{ inputs.buildx-version }}
+          driver-opts: ${{ inputs.buildx-driver-opts }}
       -
         name: Cache Docker layers
         uses: actions/cache@v2
@@ -96,7 +105,8 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
-          driver-opts: image=moby/buildkit:master
+          version: ${{ inputs.buildx-version }}
+          driver-opts: ${{ inputs.buildx-driver-opts }}
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'

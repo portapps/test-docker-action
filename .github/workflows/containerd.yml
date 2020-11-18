@@ -2,6 +2,13 @@ name: containerd
 
 on:
   workflow_dispatch:
+    inputs:
+      buildx-version:
+        description: 'Buildx version (eg. v0.3.0, latest)'
+        required: false
+      buildx-driver-opts:
+        description: 'List of additional driver-specific options (eg. image=moby/buildkit:master)'
+        required: false
   push:
     branches: master
     tags:

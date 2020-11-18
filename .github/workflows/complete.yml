@@ -2,6 +2,13 @@ name: complete
 
 on:
   workflow_dispatch:
+    inputs:
+      buildx-version:
+        description: 'Buildx version (eg. v0.3.0, latest)'
+        required: false
+      buildx-driver-opts:
+        description: 'List of additional driver-specific options (eg. image=moby/buildkit:master)'
+        required: false
   schedule:
     - cron: '0 10 * * *' # everyday at 10am
   push:
@@ -34,8 +41,6 @@ jobs:
           images: ${{ env.DOCKER_IMAGE }}
           tag-sha: true
           tag-edge: true
-          tag-match: 'v(.*)'
-          tag-match-group: '1'
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -43,7 +48,8 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
-          driver-opts: network=host
+          version: ${{ inputs.buildx-version }}
+          driver-opts: network=host,${{ inputs.buildx-driver-opts }}
       -
         name: Build and push
         id: docker_build
