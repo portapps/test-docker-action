@@ -3,11 +3,12 @@ name: full
 on:
   workflow_dispatch:
     inputs:
+      build-push-version:
+        required: false
+        default: 'master'
       buildx-version:
-        description: 'Buildx version (eg. v0.3.0, latest)'
         required: false
       buildx-driver-opts:
-        description: 'List of additional driver-specific options (eg. image=moby/buildkit:master)'
         required: false
   push:
     branches: master
@@ -64,7 +65,7 @@ jobs:
           password: ${{ matrix.password }}
       -
         name: Build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@${{ github.event.inputs.build-push-version }}
         with:
           context: .
           file: ./Dockerfile
