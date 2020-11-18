@@ -2,12 +2,6 @@ name: docker-driver
 
 on:
   workflow_dispatch:
-    inputs:
-      buildx-version:
-        required: false
-      buildx-driver-opts:
-        required: false
-        default: 'image=moby/buildkit:master'
   push:
     branches: master
     tags:
