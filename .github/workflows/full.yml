@@ -30,7 +30,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
         with:
           version: latest
-          driver-opts: image=moby/buildkit:master
+          driver-opts: image=moby/buildkit:v0.8.0-rc2
       -
         name: Login to Registry
         if: github.event_name != 'pull_request'
@@ -73,7 +73,7 @@ jobs:
 #        uses: docker/setup-buildx-action@v1
 #        with:
 #          version: latest
-#          driver-opts: image=moby/buildkit:master
+#          driver-opts: image=moby/buildkit:v0.8.0-rc2
 #      -
 #        name: Login to Registry
 #        if: github.event_name != 'pull_request'
@@ -117,7 +117,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
         with:
           version: latest
-          driver-opts: image=moby/buildkit:master
+          driver-opts: image=moby/buildkit:v0.8.0-rc2
       -
         name: Login to Registry
         if: github.event_name != 'pull_request'
