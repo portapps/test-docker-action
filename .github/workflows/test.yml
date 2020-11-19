@@ -17,9 +17,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
         run: |
-          sudo service docker status
-          sudo cat /etc/docker/daemon.json || true
-          docker info
+          sudo find / -type f -name "config.json"
       -
         name: Dump context
         if: always()
