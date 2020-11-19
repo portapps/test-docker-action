@@ -17,8 +17,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
         run: |
-          sudo apt-get install tree
-          tree -f -h $HOME
+          sudo service docker status
+          sudo cat /etc/docker/daemon.json || true
       -
         name: Dump context
         if: always()
