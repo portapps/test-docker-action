@@ -19,6 +19,7 @@ jobs:
         run: |
           sudo service docker status
           sudo cat /etc/docker/daemon.json || true
+          docker info
       -
         name: Dump context
         if: always()
