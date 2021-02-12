@@ -16,4 +16,6 @@ COPY . .
 RUN ls -al
 
 FROM alpine as qemu
+RUN apk add util-linux
 RUN cat /proc/cpuinfo && uname -mp && uname -a && arch
+RUN fallocate -l 2G huge.img
