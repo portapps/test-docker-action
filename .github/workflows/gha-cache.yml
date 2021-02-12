@@ -17,6 +17,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
+        name: Expose GitHub Runtime
+        uses: crazy-max/ghaction-github-runtime@v1
+      -
         name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
@@ -51,3 +54,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha
