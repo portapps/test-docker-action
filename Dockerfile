@@ -18,4 +18,4 @@ RUN ls -al
 FROM alpine as qemu
 RUN apk add util-linux
 RUN cat /proc/cpuinfo && uname -mp && uname -a && arch
-RUN fallocate -l 2G huge.img
+RUN dd if=/dev/zero of=1g.bin bs=2G count=1
