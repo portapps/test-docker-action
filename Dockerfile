@@ -15,7 +15,7 @@ FROM alpine as copy
 COPY . .
 RUN ls -al
 
-FROM alpine as qemu
+FROM alpine
 RUN apk add util-linux
 RUN cat /proc/cpuinfo && uname -mp && uname -a && arch
 RUN apk --update add \
@@ -72,18 +72,16 @@ RUN apk --update add \
 
 ENV DOCKER_VERSION="20.10.3"
 RUN set -x; wget -q "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" -qO "/tmp/docker.tgz" \
-  && tar --extract --file /tmp/docker.tgz --strip-components 1 --directory /usr/local/bin/ \
-  && ls -al /opt/docker
+  && tar --extract --file /tmp/docker.tgz --strip-components 1 --directory /usr/local/bin/
 
 ENV BUILDKIT_VERSION="0.8.1"
 RUN set -x; wget -q "https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-amd64.tar.gz" -qO "/tmp/buildkit.tar.gz" \
-  && tar -xzf /tmp/buildkit.tar.gz --strip 1 -C /usr/local/bin/ \
-  && ls -al /opt/docker-buildkit
+  && tar -xzf /tmp/buildkit.tar.gz --strip 1 -C /usr/local/bin/
 
 ENV BUILDX_VERSION="0.5.1"
 RUN mkdir -p /usr/libexec/docker/cli-plugins \
   && set -x; wget -q "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-amd64" -qO "/usr/libexec/docker/cli-plugins/docker-buildx" \
-  && chmod +x /opt/docker-buildx
+  && chmod +x /usr/libexec/docker/cli-plugins/docker-buildx
 
 RUN apk --update add \
     bash \
