@@ -10,7 +10,7 @@ on:
     branches: master
 
 jobs:
-  autopush:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
@@ -37,7 +37,7 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
-          driver-opts: image=crazymax/buildkit:github-actions-cache
+          driver-opts: image=tonistiigi/buildkit:github-actions-cache
       -
         name: Login to Registry
         if: github.event_name != 'pull_request'
