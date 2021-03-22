@@ -17,6 +17,19 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
+        name: Daemon config
+        run: |
+          sudo cat /etc/docker/daemon.json
+      -
+        name: Preload images
+        run: |
+          docker image ls
+          docker network inspect $(docker network ls –q)
+      -
+        name: Networks
+        run: |
+          docker network inspect $(docker network ls –q)
+      -
         name: Build
         uses: docker/build-push-action@master
         with:
