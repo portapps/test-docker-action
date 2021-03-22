@@ -24,14 +24,17 @@ jobs:
         name: Preload images
         run: |
           docker image ls
-          docker network inspect $(docker network ls –q)
       -
         name: Networks
         run: |
-          docker network inspect $(docker network ls –q)
+          docker network inspect $(docker network ls -q)
       -
         name: Build
         uses: docker/build-push-action@master
         with:
           context: .
           file: ./digest.Dockerfile
+      -
+        name: Dump context
+        if: always()
+        uses: crazy-max/ghaction-dump-context@v1
