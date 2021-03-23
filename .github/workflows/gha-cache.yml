@@ -3,11 +3,13 @@ name: gha-cache
 on:
   workflow_dispatch:
   push:
-    branches: master
+    branches:
+      - 'master'
     tags:
       - 'v*.*.*'
   pull_request:
-    branches: master
+    branches:
+      - 'master'
 
 jobs:
   build:
@@ -25,14 +27,6 @@ jobs:
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: crazymax/test-docker-action
-      -
-        name: Download buildx
-        run: |
-          cd /tmp
-          mkdir -p ~/.docker/cli-plugins
-          curl -sSL https://github.com/crazy-max/test-docker-action/releases/download/buildx-gha-cache/buildx-v0.5.1-25-g74f47e8.m.linux-amd64 -o ~/.docker/cli-plugins/docker-buildx
-          chmod +x ~/.docker/cli-plugins/docker-buildx
-          docker info
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
