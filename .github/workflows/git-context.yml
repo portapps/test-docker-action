@@ -27,7 +27,7 @@ jobs:
       -
         name: Build and push
         id: docker_build
-        uses: docker/build-push-action@master
+        uses: crazy-max/docker-build-push-action@fix-ref-spec
         with:
           file: ./Dockerfile
       -
